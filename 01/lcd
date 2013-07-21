@@ -1,0 +1,18 @@
+#!/usr/bin/env ruby
+require './lib/lcd'
+require 'optparse'
+
+if ARGV.size < 1
+  fail "Please supply the the numbers to output\n" +
+       "USAGE: ./lcd <numbers> (-s size)" +
+       "EXAMPLE: ./lcd 123 -s 3"
+end
+
+opts = {}
+OptionParser.new do |cli_opts|
+  cli_opts.on('-s SIZE', '--size SIZE') do |size|
+    opts[:size] = size.to_i
+  end
+end.parse!
+
+puts LCD.render(ARGV[0], opts)
